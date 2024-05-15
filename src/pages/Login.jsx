@@ -1,9 +1,39 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
+import { getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+import app from "../firebase/firebase.config";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
+  const auth = getAuth(app);
   const { loginUser } = useContext(AuthContext);
+
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleGithubLogin = () => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -68,6 +98,21 @@ const Login = () => {
               <a className="text-blue-600 font-semibold pl-3">Register</a>
             </Link>
           </p>
+
+          <div className="p-4 space-y-3 mx-auto">
+            <h2 className="text-xl text-center font-semibold">Login With</h2>
+            <button onClick={handleGoogleLogin} className="btn  w-full">
+              <FaGoogle></FaGoogle>
+              Login With Google
+            </button>
+            <button
+              onClick={handleGithubLogin}
+              className="btn btn-outline w-full"
+            >
+              <FaGithub></FaGithub>
+              Login With Github
+            </button>
+          </div>
         </div>
       </div>
     </div>
