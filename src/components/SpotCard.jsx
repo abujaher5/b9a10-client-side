@@ -1,4 +1,17 @@
-const SpotCard = () => {
+const SpotCard = ({ touristSpot }) => {
+  const {
+    SpotName,
+    CountryName,
+    Location,
+    ShortDescription,
+    AverageCost,
+    Season,
+    TravelTime,
+    TotalVisitor,
+    UserEmail,
+    UserName,
+    Image,
+  } = touristSpot;
   return (
     <section className="">
       <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">

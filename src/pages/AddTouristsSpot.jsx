@@ -1,4 +1,10 @@
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
+
 const AddTouristsSpot = () => {
+  const { user } = useContext(AuthContext);
+
   const handleAddSpot = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +19,7 @@ const AddTouristsSpot = () => {
     const UserEmail = form.email.value;
     const UserName = form.userName.value;
     const Image = form.image.value;
+    // const email = user.email;
     const FromDetails = {
       SpotName,
       CountryName,
@@ -27,6 +34,26 @@ const AddTouristsSpot = () => {
       Image,
     };
     console.log(FromDetails);
+
+    fetch("http://localhost:5000/addTouristSpot", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(FromDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "Tourist Spot Added Successfully",
+            icon: "success",
+            confirmButtonText: "Go Back",
+          });
+        }
+      });
   };
 
   return (
