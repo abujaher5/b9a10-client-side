@@ -8,10 +8,6 @@ const Home = () => {
     <div>
       <Banner></Banner>
 
-      {/* <div>
-        <h3>Length:{touristSpots.length}</h3>
-        <SpotCard></SpotCard>
-      </div> */}
       <div className="grid grid-cols-2 gap-3">
         {touristSpots.map((touristSpot) => (
           <SpotCard key={touristSpot._id} touristSpot={touristSpot}></SpotCard>

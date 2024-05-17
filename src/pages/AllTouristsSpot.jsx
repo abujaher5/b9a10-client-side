@@ -1,7 +1,25 @@
+import { useLoaderData } from "react-router-dom";
+
+import AllSpot from "../components/AllSpot";
+
 const AllTouristsSpot = () => {
+  const allSpot = useLoaderData();
+  const {
+    spot_name,
+    country_name,
+    location,
+    short_description,
+    average_cost,
+    seasonality,
+    travel_Time,
+    totalVisitors,
+    user_email,
+    user_name,
+    image,
+  } = allSpot;
   return (
     <section className="">
-      <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
+      {/* <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
         <a
           rel="noopener noreferrer"
           href="#"
@@ -30,6 +48,12 @@ const AllTouristsSpot = () => {
             </button>
           </div>
         </a>
+      </div> */}
+
+      <div>
+        {allSpot.map((spot) => (
+          <AllSpot key={spot._id} spot={spot}></AllSpot>
+        ))}
       </div>
     </section>
   );

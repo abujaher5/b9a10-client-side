@@ -8,30 +8,30 @@ const AddTouristsSpot = () => {
   const handleAddSpot = (e) => {
     e.preventDefault();
     const form = e.target;
-    const SpotName = form.spotName.value;
-    const CountryName = form.countryName.value;
-    const Location = form.location.value;
-    const ShortDescription = form.description.value;
-    const AverageCost = form.cost.value;
-    const Season = form.seasonality.value;
-    const TravelTime = form.time.value;
-    const TotalVisitor = form.totalVisitor.value;
-    const UserEmail = form.email.value;
-    const UserName = form.userName.value;
-    const Image = form.image.value;
+    const spot_name = form.spotName.value;
+    const country_name = form.countryName.value;
+    const location = form.location.value;
+    const short_description = form.description.value;
+    const average_cost = form.cost.value;
+    const seasonality = form.seasonality.value;
+    const travel_Time = form.time.value;
+    const totalVisitors = form.totalVisitor.value;
+    const user_email = form.email.value;
+    const user_name = form.userName.value;
+    const image = form.image.value;
     // const email = user.email;
     const FromDetails = {
-      SpotName,
-      CountryName,
-      Location,
-      ShortDescription,
-      AverageCost,
-      Season,
-      TravelTime,
-      TotalVisitor,
-      UserEmail,
-      UserName,
-      Image,
+      spot_name,
+      country_name,
+      location,
+      short_description,
+      average_cost,
+      seasonality,
+      travel_Time,
+      totalVisitors,
+      user_email,
+      user_name,
+      image,
     };
     console.log(FromDetails);
 
