@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 
 const SpotDetails = () => {
-  const spotDeatils = useLoaderData();
+  const spotDetail = useLoaderData();
   const { id } = useParams();
-  // console.log(id);
-
-  console.log(spotDeatils);
-  const [singleSpot, setSingleSpot] = useState();
-  useEffect(() => {
-    const spotInfo = spotDeatils.find((details) => details._id == id);
-    setSingleSpot(spotInfo);
-  }, []);
 
   const {
     spot_name,
@@ -22,11 +14,9 @@ const SpotDetails = () => {
     seasonality,
     travel_Time,
     totalVisitors,
-    user_email,
-    user_name,
     image,
-  } = spotDeatils;
-  // console.log(_id);
+  } = spotDetail;
+
   console.log(spot_name);
   return (
     <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
@@ -36,7 +26,7 @@ const SpotDetails = () => {
         className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50"
       >
         <img
-          src="https://i.ibb.co/mJ0GRD4/istockphoto-1799323584-1024x1024.jpg"
+          src={image}
           alt=""
           className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500"
         />
@@ -46,6 +36,7 @@ const SpotDetails = () => {
           </h3>
 
           <p>Location : {location}</p>
+          <p>Country Name : {country_name}</p>
 
           <p>Average Cost : {average_cost}</p>
           <p>Season : {seasonality} </p>

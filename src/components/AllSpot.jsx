@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AllSpot = ({ spot }) => {
   const {
     spot_name,

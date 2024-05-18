@@ -18,8 +18,6 @@ const SpotCard = ({ touristSpot }) => {
   } = touristSpot;
 
   const handleDelete = (_id) => {
-    console.log(_id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -84,7 +82,7 @@ const SpotCard = ({ touristSpot }) => {
               >
                 Delete
               </button>
-              <Link to={`update`}>
+              <Link to={`/updateSpot/${_id}`}>
                 <button className=" btn">Update</button>
               </Link>
             </div>
