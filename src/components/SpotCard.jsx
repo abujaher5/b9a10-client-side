@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const SpotCard = ({ touristSpot }) => {
   const {
+    _id,
     spot_name,
     country_name,
     location,
@@ -12,6 +16,39 @@ const SpotCard = ({ touristSpot }) => {
     user_name,
     image,
   } = touristSpot;
+
+  const handleDelete = (_id) => {
+    console.log(_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success",
+        // });
+
+        fetch(`http://localhost:5000/addTouristSpot/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted Successfully");
+            }
+          });
+      }
+    });
+  };
 
   return (
     <section className="">
@@ -37,9 +74,20 @@ const SpotCard = ({ touristSpot }) => {
             <p>{location}</p>
             <p>{average_cost}</p>
 
-            <button className="btn-outline btn bg-orange-500">
-              View Details
-            </button>
+            <div className="flex">
+              <Link to={`/spotDeatils/${_id}`}>
+                <button className=" btn bg-orange-500">View Details</button>
+              </Link>
+              <button
+                onClick={() => handleDelete(_id)}
+                className=" btn bg-red-600"
+              >
+                Delete
+              </button>
+              <Link to={`update`}>
+                <button className=" btn">Update</button>
+              </Link>
+            </div>
           </div>
         </a>
       </div>
