@@ -34,9 +34,12 @@ const SpotCard = ({ touristSpot }) => {
         //   icon: "success",
         // });
 
-        fetch(`http://localhost:5000/addTouristSpot/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

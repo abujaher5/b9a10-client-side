@@ -35,7 +35,7 @@ const AddTouristsSpot = () => {
     };
     console.log(FromDetails);
 
-    fetch("http://localhost:5000/addTouristSpot", {
+    fetch("https://b9a10-server-side-coral.vercel.app/addTouristSpot", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

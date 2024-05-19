@@ -52,7 +52,7 @@ const UpdateSpot = () => {
 
     //send data
 
-    fetch(`http://localhost:5000/addTouristSpot/${_id}`, {
+    fetch(`https://b9a10-server-side-coral.vercel.app/addTouristSpot/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
