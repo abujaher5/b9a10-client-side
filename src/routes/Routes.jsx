@@ -9,11 +9,13 @@ import AddTouristsSpot from "../pages/AddTouristsSpot";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import SpotDetails from "../components/SpotDetails";
 import UpdateSpot from "../components/UpdateSpot";
+import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: "/",
