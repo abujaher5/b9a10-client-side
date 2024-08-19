@@ -1,24 +1,27 @@
-import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 // import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
 const UpdateSpot = () => {
-  // const { id } = useParams();
   const updateSpot = useLoaderData();
+  const { user } = useContext(AuthContext);
+
   const {
     _id,
     spot_name,
     country_name,
     location,
-    description,
+    short_description,
     average_cost,
     seasonality,
     travel_time,
     totalVisitors,
-    user_email,
-    user_name,
     image,
   } = updateSpot;
+
+  const navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const UpdateSpot = () => {
     const spot_name = form.spot_name.value;
     const country_name = form.country_name.value;
     const location = form.location.value;
-    const description = form.description.value;
+    const short_description = form.short_description.value;
     const average_cost = form.average_cost.value;
     const seasonality = form.seasonality.value;
     const travel_time = form.travel_time.value;
@@ -34,12 +37,12 @@ const UpdateSpot = () => {
     const user_email = form.user_email.value;
     const user_name = form.user_name.value;
     const image = form.image.value;
-    // const user_email = user.user_email;
+
     const spotUpdate = {
       spot_name,
       country_name,
       location,
-      description,
+      short_description,
       average_cost,
       seasonality,
       travel_time,
@@ -52,7 +55,7 @@ const UpdateSpot = () => {
 
     //send data
 
-    fetch(`https://b9a10-server-side-coral.vercel.app/addTouristSpot/${_id}`, {
+    fetch(`http://localhost:5000/addTouristSpot/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -67,8 +70,8 @@ const UpdateSpot = () => {
             title: "Success",
             text: "Spot Update Successfully",
             icon: "success",
-            confirmButtonText: "Go Back",
           });
+          navigate("/");
         }
       });
   };
@@ -111,8 +114,8 @@ const UpdateSpot = () => {
             <label className="label"> Short Description</label>
             <input
               type="text"
-              name="description"
-              defaultValue={description}
+              name="short_description"
+              defaultValue={short_description}
               placeholder="Short Description"
               className="input input-bordered w-full "
             />
@@ -162,7 +165,7 @@ const UpdateSpot = () => {
             <input
               type="text"
               name="user_email"
-              defaultValue={user_email}
+              defaultValue={user?.email}
               placeholder="Enter Amount"
               className="input input-bordered w-full "
             />
@@ -172,7 +175,7 @@ const UpdateSpot = () => {
             <input
               type="text"
               name="user_name"
-              defaultValue={user_name}
+              defaultValue={user?.displayName}
               placeholder="Enter Amount"
               className="input input-bordered w-full "
             />

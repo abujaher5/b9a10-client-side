@@ -1,9 +1,8 @@
 // import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 const SpotDetails = () => {
   const spotDetail = useLoaderData();
-  const { id } = useParams();
 
   const {
     spot_name,

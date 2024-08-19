@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddTouristsSpot = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddSpot = (e) => {
     e.preventDefault();
@@ -16,10 +18,10 @@ const AddTouristsSpot = () => {
     const seasonality = form.seasonality.value;
     const travel_Time = form.time.value;
     const totalVisitors = form.totalVisitor.value;
-    const user_email = form.email.value;
-    const user_name = form.userName.value;
+    const user_email = user?.email;
+    const user_name = user?.displayName;
     const image = form.image.value;
-    // const email = user.email;
+
     const FromDetails = {
       spot_name,
       country_name,
@@ -33,9 +35,8 @@ const AddTouristsSpot = () => {
       user_name,
       image,
     };
-    console.log(FromDetails);
 
-    fetch("https://b9a10-server-side-coral.vercel.app/addTouristSpot", {
+    fetch("http://localhost:5000/addTouristSpot", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -50,8 +51,8 @@ const AddTouristsSpot = () => {
             title: "Success",
             text: "Tourist Spot Added Successfully",
             icon: "success",
-            confirmButtonText: "Go Back",
           });
+          navigate("/");
         }
       });
   };
@@ -138,7 +139,7 @@ const AddTouristsSpot = () => {
             <input
               type="text"
               name="email"
-              placeholder="Enter Amount"
+              defaultValue={user?.email}
               className="input input-bordered w-full "
             />
           </div>
@@ -147,7 +148,7 @@ const AddTouristsSpot = () => {
             <input
               type="text"
               name="userName"
-              placeholder="Enter Amount"
+              defaultValue={user?.displayName}
               className="input input-bordered w-full "
             />
           </div>

@@ -20,10 +20,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () =>
-          fetch(
-            "https://b9a10-server-side-coral.vercel.app/addTouristSpot"
-          ),
+        loader: () => fetch("http://localhost:5000/addTouristSpot"),
       },
       {
         path: "/login",
@@ -36,10 +33,7 @@ export const router = createBrowserRouter([
       {
         path: "/allTouristSpot",
         element: <AllTouristsSpot></AllTouristsSpot>,
-        loader: () =>
-          fetch(
-            "https://b9a10-server-side-coral.vercel.app/addTouristSpot"
-          ),
+        loader: () => fetch("http://localhost:5000/addTouristSpot"),
       },
       {
         path: "/addTouristSpot",
@@ -49,6 +43,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "/myList",
         element: (
@@ -56,30 +51,28 @@ export const router = createBrowserRouter([
             <MyList></MyList>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(
-            "https://b9a10-server-side-coral.vercel.app/addTouristSpot"
-          ),
+        loader: () => fetch("http://localhost:5000/addTouristSpot"),
       },
+
       {
-        path: "/spotDeatils/:id",
+        path: "/spotDetails/:id",
         element: (
           <PrivateRoute>
             <SpotDetails></SpotDetails>
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${params.id}`
-          ),
+          fetch(`http://localhost:5000/addTouristSpot/${params.id}`),
       },
       {
         path: "/updateSpot/:id",
-        element: <UpdateSpot></UpdateSpot>,
+        element: (
+          <PrivateRoute>
+            <UpdateSpot></UpdateSpot>,
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(
-            `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${params.id}`
-          ),
+          fetch(`http://localhost:5000/addTouristSpot/${params.id}`),
       },
     ],
   },

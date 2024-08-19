@@ -1,9 +1,20 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { GithubAuthProvider } from "firebase/auth";
+import app from "../firebase/firebase.config";
 
 const Register = () => {
+  const auth = getAuth(app);
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,11 +28,36 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleGithubLogin = () => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col ">
@@ -74,11 +110,28 @@ const Register = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
+
+            <div className="p-4 space-y-3 mx-auto">
+              <h2 className="text-xl text-center font-semibold">Login With</h2>
+              <button onClick={handleGoogleLogin} className="btn  w-full">
+                <FaGoogle></FaGoogle>
+                Login With Google
+              </button>
+              <button
+                onClick={handleGithubLogin}
+                className="btn btn-outline w-full"
+              >
+                <FaGithub></FaGithub>
+                Login With Github
+              </button>
+            </div>
           </form>
           <p className="text-center p-3">
             Already have account !! Please
             <Link to="/login">
-              <a className="text-blue-600 font-semibold pl-3">Login</a>
+              <button className="text-blue-600 font-semibold pl-3">
+                Login
+              </button>
             </Link>
           </p>
         </div>

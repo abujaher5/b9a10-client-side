@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import app from "../firebase/firebase.config";
@@ -13,12 +13,14 @@ const Login = () => {
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -29,6 +31,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -46,6 +49,7 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate("/");
       })
       .then((error) => {
         console.error(error);
@@ -95,7 +99,9 @@ const Login = () => {
           <p className="text-center p-3">
             New Here !! Please
             <Link to="/register">
-              <a className="text-blue-600 font-semibold pl-3">Register</a>
+              <button className="text-blue-600 font-semibold pl-3">
+                Register
+              </button>
             </Link>
           </p>
 
