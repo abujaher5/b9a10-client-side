@@ -13,7 +13,7 @@ const MyList = () => {
   const [listed, setListed] = useState([]);
 
   const exDetails = listed.filter((lis) => lis.user_email === user?.email);
-  const url = `http://localhost:5000/addTouristSpot?email=${user?.email}`;
+  const url = `https://b9a10-server-side-coral.vercel.app/addTouristSpot?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -31,9 +31,12 @@ const MyList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/addTouristSpot/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

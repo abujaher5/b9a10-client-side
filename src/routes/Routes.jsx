@@ -20,7 +20,8 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/addTouristSpot"),
+        loader: () =>
+          fetch("https://b9a10-server-side-coral.vercel.app/addTouristSpot"),
       },
       {
         path: "/login",
@@ -33,7 +34,8 @@ export const router = createBrowserRouter([
       {
         path: "/allTouristSpot",
         element: <AllTouristsSpot></AllTouristsSpot>,
-        loader: () => fetch("http://localhost:5000/addTouristSpot"),
+        loader: () =>
+          fetch("https://b9a10-server-side-coral.vercel.app/addTouristSpot"),
       },
       {
         path: "/addTouristSpot",
@@ -51,7 +53,8 @@ export const router = createBrowserRouter([
             <MyList></MyList>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/addTouristSpot"),
+        loader: () =>
+          fetch("https://b9a10-server-side-coral.vercel.app/addTouristSpot"),
       },
 
       {
@@ -62,7 +65,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addTouristSpot/${params.id}`),
+          fetch(
+            `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${params.id}`
+          ),
       },
       {
         path: "/updateSpot/:id",
@@ -72,7 +77,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addTouristSpot/${params.id}`),
+          fetch(
+            `https://b9a10-server-side-coral.vercel.app/addTouristSpot/${params.id}`
+          ),
       },
     ],
   },
